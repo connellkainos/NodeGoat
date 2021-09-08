@@ -45,6 +45,14 @@ jobs:
           -v "$PWD:/app:cached" quay.io/appthreat/sast-scan scan \
           --src /app \
           --type nodejs --out_dir ${pwd}/Reports
+    - task: PublishBuildArtifacts@1
+      inputs:
+       pathToPublish: '$(pwd)/Reports'
+       artifactName: Checkov-Report.xml
+    - task: PublishBuildArtifacts@1
+      inputs:
+       pathToPublish: '$(pwd)/Reports'
+       artifactName: '*.json'
     - task: Docker@2
       displayName: 'Build Docker Image'
       inputs:
