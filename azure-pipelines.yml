@@ -19,7 +19,6 @@ stages:
     displayName: Run Checkov
     steps:
     - script: |
-      docker pull bridgecrew/checkov
       docker run -t -v $(System.DefaultWorkingDirectory):/tf bridgecrew/checkov --directory .
     displayName: 'Checkov Static Code Analysis'
 - stage: Build
