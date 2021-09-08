@@ -17,14 +17,14 @@ jobs:
         script: |
           cd $(System.DefaultWorkingDirectory)
           pwd
-          ls -lah
+          mkdir Reports
           docker pull bridgecrew/checkov
           docker run \
           --volume $(pwd):/tf bridgecrew/checkov \
           --directory /tf \
           --skip-check CKV_DOCKER* \
           --output junitxml \
-          --soft-fail > $(pwd)/Checkov-Report.xml
+          --soft-fail > $(pwd)/Reports/Checkov-Report.xml
     - task: PublishTestResults@2
       displayName: 'Publish Checkov scan results'
       inputs:
@@ -44,7 +44,7 @@ jobs:
           docker run --rm -e "WORKSPACE=${PWD}" \
           -v "$PWD:/app:cached" quay.io/appthreat/sast-scan scan \
           --src /app \
-          --type nodejs
+          --type nodejs --out_dir ${pwd}/Reports
     - task: Docker@2
       displayName: 'Build Docker Image'
       inputs:
