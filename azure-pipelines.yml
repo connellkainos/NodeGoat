@@ -18,7 +18,7 @@ jobs:
           pwd
           ls
           docker pull bridgecrew/checkov
-          docker run -t -v /user/tf:/tf bridgecrew/checkov -d .
+          docker run -t -v $(System.DefaultWorkingDirectory):/tf bridgecrew/checkov -d /tf
 
 # Docker
 # Build a Docker image
