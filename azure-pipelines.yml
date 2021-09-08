@@ -22,6 +22,7 @@ jobs:
           docker run \
           --volume $(pwd):/tf bridgecrew/checkov \
           --directory /tf \
+          --skip-check CKV_DOCKER* \
           --output junitxml \
           --soft-fail > $(pwd)/Checkov-Report.xml
     - task: PublishTestResults@2
