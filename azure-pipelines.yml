@@ -25,13 +25,15 @@ jobs:
           --output junitxml \
           --soft-fail > $(System.DefaultWorkingDirectory)/Checkov-Report.xml
     - task: PublishTestResults@2
+      displayName: 'Publish Checkov scan results'
       inputs:
         testRunTitle: "Checkov Results"
         failTaskOnFailedTests: true
         testResultsFormat: "JUnit"
         testResultsFiles: "CheckovReport.xml"
         searchFolder: "$(System.DefaultWorkingDirectory)"
-      displayName: "Publish Checkov scan results"
+
+
 
 # Docker
 # Build a Docker image
