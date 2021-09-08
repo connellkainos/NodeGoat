@@ -20,17 +20,17 @@ jobs:
           ls
           docker pull bridgecrew/checkov
           docker run \
-          --volume $(System.DefaultWorkingDirectory):/tf bridgecrew/checkov \
+          --volume $(pwd):/tf bridgecrew/checkov \
           --directory /tf \
           --output junitxml \
-          --soft-fail > $(System.DefaultWorkingDirectory)/Checkov-Report.xml
+          --soft-fail > $(pwd)/Checkov-Report.xml
     - task: PublishTestResults@2
       displayName: 'Publish Checkov scan results'
       inputs:
         testRunTitle: "Checkov Results"
         failTaskOnFailedTests: true
         testResultsFormat: "JUnit"
-        testResultsFiles: "CheckovReport.xml"
+        testResultsFiles: "Checkov-Report.xml"
         searchFolder: "$(System.DefaultWorkingDirectory)"
 
 
