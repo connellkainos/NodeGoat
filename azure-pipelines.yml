@@ -12,6 +12,16 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
+- stage: QualityCheckStage
+  displayName: Quality Check Stage
+  jobs:
+  - job: QualityCheck
+    displayName: Run Checkov
+    steps:
+    - script: |
+      docker pull bridgecrew/checkov
+      docker run -t -v $(System.DefaultWorkingDirectory):/tf bridgecrew/checkov --directory .
+    displayName: 'Checkov Static Code Analysis'
 - stage: Build
   displayName: Build image
   jobs:
