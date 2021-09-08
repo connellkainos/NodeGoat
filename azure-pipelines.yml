@@ -5,8 +5,8 @@ pool:
   vmImage: ubuntu-latest
 
 jobs:
-- job: RunCheckov
-  displayName: 'Run Checkov'
+- job: AssessNodeGoat
+  displayName: 'Assess NodeGoat'
   steps:
     - checkout: self
     - task: Bash@3
@@ -45,13 +45,14 @@ jobs:
           -v "$PWD:/app:cached" quay.io/appthreat/sast-scan scan \
           --src /app \
           --type nodejs --out_dir ${pwd}/Reports
+          ls $(pwd)/Reports
     - task: PublishTestResults@2
       displayName: 'Publish AppThreat results'
       inputs:
         testRunTitle: "AppThreat Results"
         failTaskOnFailedTests: false
         testResultsFiles: "*.json"
-        searchFolder: "$(System.DefaultWorkingDirectory)/Reports"
+        searchFolder: "$(pwd)/Reports"
     - task: Docker@2
       displayName: 'Build Docker Image'
       inputs:
