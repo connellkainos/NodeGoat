@@ -18,7 +18,7 @@ jobs:
           pwd
           ls
           docker pull bridgecrew/checkov
-          docker run -t -v $(System.DefaultWorkingDirectory):/tf bridgecrew/checkov -d /tf
+          docker run --volume $(System.DefaultWorkingDirectory):/tf bridgecrew/checkov --directory /tf --output junitxml > $(System.DefaultWorkingDirectory)/Checkov-Report.xml
 
 # Docker
 # Build a Docker image
