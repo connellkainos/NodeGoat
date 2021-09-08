@@ -32,7 +32,7 @@ jobs:
         failTaskOnFailedTests: true
         testResultsFormat: "JUnit"
         testResultsFiles: "Checkov-Report.xml"
-        searchFolder: "$(System.DefaultWorkingDirectory)"
+        searchFolder: "$(System.DefaultWorkingDirectory)/Reports"
     - task: Bash@3
       displayName: 'Run AppThreat SAST-Scan'
       inputs:
@@ -45,14 +45,13 @@ jobs:
           -v "$PWD:/app:cached" quay.io/appthreat/sast-scan scan \
           --src /app \
           --type nodejs --out_dir ${pwd}/Reports
-    - task: PublishBuildArtifacts@1
+    - task: PublishTestResults@2
+      displayName: 'Publish AppThreat results'
       inputs:
-       pathToPublish: '$(pwd)/Reports'
-       artifactName: Checkov-Report.xml
-    - task: PublishBuildArtifacts@1
-      inputs:
-       pathToPublish: '$(pwd)/Reports'
-       artifactName: '*.json'
+        testRunTitle: "AppThreat Results"
+        failTaskOnFailedTests: false
+        testResultsFiles: "*.json"
+        searchFolder: "$(System.DefaultWorkingDirectory)/Reports"
     - task: Docker@2
       displayName: 'Build Docker Image'
       inputs:
