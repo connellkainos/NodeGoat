@@ -19,7 +19,7 @@ stages:
     displayName: Run Checkov
     steps:
     - script: |
-      docker run -t -v $(System.DefaultWorkingDirectory):/tf bridgecrew/checkov --directory .
+      echo 'Connell Test'
     displayName: 'Checkov Static Code Analysis'
 - stage: Build
   displayName: Build image
