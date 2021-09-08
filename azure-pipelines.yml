@@ -19,7 +19,19 @@ jobs:
           pwd
           ls
           docker pull bridgecrew/checkov
-          docker run --volume $(System.DefaultWorkingDirectory):/tf bridgecrew/checkov --directory /tf --output junitxml > $(System.DefaultWorkingDirectory)/Checkov-Report.xml
+          docker run \
+          --volume $(System.DefaultWorkingDirectory):/tf bridgecrew/checkov \
+          --directory /tf \
+          --output junitxml \
+          --soft-fail > $(System.DefaultWorkingDirectory)/Checkov-Report.xml
+    - task: PublishTestResults@2
+      inputs:
+        testRunTitle: "Checkov Results"
+        failTaskOnFailedTests: true
+        testResultsFormat: "JUnit"
+        testResultsFiles: "CheckovReport.xml"
+        searchFolder: "$(System.DefaultWorkingDirectory)"
+      displayName: "Publish Checkov scan results"
 
 # Docker
 # Build a Docker image
