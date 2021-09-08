@@ -44,7 +44,7 @@ jobs:
           docker run --rm -e "WORKSPACE=${PWD}" \
           -v "$PWD:/app:cached" quay.io/appthreat/sast-scan scan \
           --src /app \
-          --type nodejs --out_dir ${pwd}/Reports
+          --type nodejs,credscan,yaml --out_dir ${pwd}/Reports
           ls $(pwd)/Reports
     - task: PublishTestResults@2
       displayName: 'Publish AppThreat results'
