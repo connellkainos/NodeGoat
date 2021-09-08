@@ -17,7 +17,7 @@ jobs:
         script: |
           cd $(System.DefaultWorkingDirectory)
           pwd
-          ls
+          ls -lah
           docker pull bridgecrew/checkov
           docker run \
           --volume $(pwd):/tf bridgecrew/checkov \
