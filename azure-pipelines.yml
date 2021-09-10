@@ -34,6 +34,15 @@ jobs:
         testResultsFiles: "Checkov-Report.xml"
         searchFolder: "$(System.DefaultWorkingDirectory)/Reports"
     - task: Bash@3
+      displayName: 'Run PNPM Audit'
+      inputs:
+        targetType: 'inline'
+        failOnStderr: false
+        script: |
+          cd $(System.DefaultWorkingDirectory)
+          pwd
+          pnpm audit
+    - task: Bash@3
       displayName: 'Run AppThreat SAST-Scan'
       inputs:
         targetType: 'inline'
