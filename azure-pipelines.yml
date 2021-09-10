@@ -33,16 +33,7 @@ jobs:
         testResultsFormat: "JUnit"
         testResultsFiles: "Checkov-Report.xml"
         searchFolder: "$(System.DefaultWorkingDirectory)/Reports"
-    - task: Bash@3
-      displayName: 'Run PNPM Audit'
-      inputs:
-        targetType: 'inline'
-        failOnStderr: false
-        script: |
-          cd $(System.DefaultWorkingDirectory)
-          pwd
-          npm install -g pnpm
-          pnpm audit
+  
     - task: Bash@3
       displayName: 'Run AppThreat SAST-Scan'
       inputs:
