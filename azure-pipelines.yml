@@ -41,6 +41,7 @@ jobs:
         script: |
           cd $(System.DefaultWorkingDirectory)
           pwd
+          npm install -g pnpm
           pnpm audit
     - task: Bash@3
       displayName: 'Run AppThreat SAST-Scan'
