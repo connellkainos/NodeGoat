@@ -9,6 +9,9 @@ jobs:
   displayName: 'Assess NodeGoat'
   steps:
     - checkout: self
+    - task: RenovateMe@0
+      inputs:
+       renovateOptionsVersion: 'latest'
     - task: Bash@3
       displayName: 'Run Checkov Test'
       inputs:
