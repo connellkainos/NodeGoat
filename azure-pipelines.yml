@@ -13,7 +13,7 @@ jobs:
       displayName: 'Dependency Check'
       inputs:
        projectName: 'Testing'
-       scanPath: .
+       scanPath: $(System.DefaultWorkingDirectory)
     - task: Bash@3
       displayName: 'Run Checkov Test'
       inputs:
