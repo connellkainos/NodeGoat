@@ -9,9 +9,11 @@ jobs:
   displayName: 'Assess NodeGoat'
   steps:
     - checkout: self
-    - task: RenovateMe@0
+    - task: dependency-check.dependencycheck.dependency-check-build-task.dependency-check-build-task@6
+      displayName: 'Dependency Check'
       inputs:
-       renovateOptionsVersion: 'latest'
+       projectName: 'Testing'
+       scanPath: .
     - task: Bash@3
       displayName: 'Run Checkov Test'
       inputs:
