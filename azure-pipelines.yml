@@ -14,6 +14,7 @@ jobs:
       inputs:
        projectName: 'Testing'
        scanPath: $(System.DefaultWorkingDirectory)
+       format: JUNIT
     - task: Bash@3
       displayName: 'Run Checkov Test'
       inputs:
