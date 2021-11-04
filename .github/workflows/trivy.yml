@@ -1,0 +1,13 @@
+name: trivy
+
+on: [push,pull_request]
+
+jobs:
+  trivy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '2'
+    - name: Aqua Security Trivy
+      uses: aquasecurity/trivy-action@0.0.22
