@@ -10,7 +10,7 @@ jobs:
       with:
         fetch-depth: '2'
     - name: Aqua Security Trivy
-      uses: aquasecurity/trivy-action@0.0.22
+      uses: aquasecurity/trivy-action@0.29.0
       with:
         scan-type: 'fs'
         ignore-unfixed: true
